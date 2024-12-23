@@ -1,8 +1,9 @@
 import pygame
+import sys
 from constants import *
 from player import Player
 from asteroid import Asteroid
-from asteroidfield import *
+from asteroidfield import AsteroidField
 
 def main():
 	pygame.init()
@@ -18,15 +19,26 @@ def main():
 	player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2,)
 	asteroidfield = AsteroidField()
 	while True:
+		
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				return
+		
 		screen.fill((0,0,0))
+		
 		for obj in drawable:
 			obj.draw(screen)
+		
 		for obj in updatable:
 			obj.update(dt)
+
+		for obj in asteroids:
+			if obj.collision(player):
+				print("Game Over!")
+				sys.exit()
+		
 		pygame.display.flip()
+		
 		dt = clock.tick(60) / 1000
 
 
