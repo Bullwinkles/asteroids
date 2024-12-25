@@ -8,6 +8,8 @@ from shot import Shot
 
 def main():
 	pygame.init()
+	pygame.display.set_caption("TEMU Asteroids")
+	background = pygame.image.load("space.jpg")
 	screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 	clock = pygame.time.Clock()
 	dt = 0
@@ -43,7 +45,7 @@ def main():
 					bullet.kill()
 					asteroid.split()
 		
-		screen.fill((0,0,0))
+		screen.blit(background, (0,0))
 		
 		for obj in drawable:
 			obj.draw(screen)
